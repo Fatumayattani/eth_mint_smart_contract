@@ -1,28 +1,105 @@
-REMIX DEFAULT WORKSPACE
+Here's the updated `README.md` file with the acknowledgment:
 
-Remix default workspace is present when:
-i. Remix loads for the very first time 
-ii. A new workspace is created with 'Default' template
-iii. There are no files existing in the File Explorer
+---
 
-This workspace contains 3 directories:
+# ethSmartContract
 
-1. 'contracts': Holds three contracts with increasing levels of complexity.
-2. 'scripts': Contains four typescript files to deploy a contract. It is explained below.
-3. 'tests': Contains one Solidity test file for 'Ballot' contract & one JS test file for 'Storage' contract.
+**ethSmartContract** is a simple Solidity smart contract that allows a designated minter to create new coins (tokens) and transfer them between accounts. The contract is designed to be easily understandable for beginners and serves as a basic example of minting and transferring tokens on the Ethereum blockchain.
 
-SCRIPTS
+## Table of Contents
 
-The 'scripts' folder has four typescript files which help to deploy the 'Storage' contract using 'web3.js' and 'ethers.js' libraries.
+- [Introduction](#introduction)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Contract Details](#contract-details)
+- [Functions](#functions)
+- [Installation](#installation)
+- [Testing](#testing)
+- [License](#license)
+- [Acknowledgment](#acknowledgment)
 
-For the deployment of any other contract, just update the contract's name from 'Storage' to the desired contract and provide constructor arguments accordingly 
-in the file `deploy_with_ethers.ts` or  `deploy_with_web3.ts`
+## Introduction
 
-In the 'tests' folder there is a script containing Mocha-Chai unit tests for 'Storage' contract.
+This contract provides a basic framework for minting and transferring tokens on the Ethereum network. The contract owner (minter) is the only one authorized to mint new tokens, and users can send tokens to each other once they have been minted.
 
-To run a script, right click on file name in the file explorer and click 'Run'. Remember, Solidity file must already be compiled.
-Output from script will appear in remix terminal.
+## Features
 
-Please note, require/import is supported in a limited manner for Remix supported modules.
-For now, modules supported by Remix are ethers, web3, swarmgw, chai, multihashes, remix and hardhat only for hardhat.ethers object/plugin.
-For unsupported modules, an error like this will be thrown: '<module_name> module require is not supported by Remix IDE' will be shown.
+- **Minting**: Only the contract owner can mint new tokens.
+- **Token Transfers**: Users can transfer their tokens to other users.
+- **Event Emission**: The contract emits an event whenever a token transfer occurs.
+
+## Getting Started
+
+To interact with this contract, you'll need to have basic knowledge of Ethereum, Solidity, and smart contracts. You will also need to install development tools like `Truffle` or `Hardhat` for deployment and testing.
+
+## Contract Details
+
+- **Solidity Version**: `0.5.1`
+- **License**: MIT
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v10 or later)
+- [npm](https://www.npmjs.com/) (v6 or later)
+- [Solidity](https://soliditylang.org/) compiler
+- [Truffle](https://www.trufflesuite.com/) or [Hardhat](https://hardhat.org/) for development and testing
+
+## Functions
+
+### `constructor()`
+
+- Initializes the contract by setting the `minter` address to the account that deploys the contract.
+
+### `mint(address receiver, uint amount)`
+
+- Mints new tokens and assigns them to the specified `receiver`.
+- **Requirements**: Only the minter can call this function. The amount should be less than `1e60`.
+
+### `send(address receiver, uint amount)`
+
+- Sends tokens from the sender's balance to the specified `receiver`.
+- **Requirements**: The sender must have a balance greater than or equal to the `amount` to be transferred.
+
+### `balances(address _account) external view returns (uint)`
+
+- Returns the balance of the specified `_account`.
+
+### Events
+
+- `Sent(address from, address to, uint amount)`: Triggered whenever tokens are transferred between addresses.
+
+## Installation
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/ethSmartContract.git
+    ```
+2. Navigate to the project directory:
+    ```bash
+    cd ethSmartContract
+    ```
+3. Install the necessary dependencies:
+    ```bash
+    npm install
+    ```
+
+## Testing
+
+1. Deploy the contract to a local blockchain (e.g., Ganache):
+    ```bash
+    truffle migrate --reset
+    ```
+2. Run the tests:
+    ```bash
+    truffle test
+    ```
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+## Acknowledgment
+
+The content for this smart contract is from Simplilearn.
+
+---
